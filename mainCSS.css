@@ -5,12 +5,9 @@
 		font-weight:bold;
 		text-align: center;
 	}
-.card {
-	   width:10%; 
-	   height:10%; 
-	   content:url(https://casino4you.com/wp-content/uploads/2015/03/peekredback.jpg);
-	   margin:5%; 
-	}
+body{
+	text-align: center;
+}
 section.difficulty div{
 		font-family: Trebuchet MS, sans-serif;
 		font-size:200%;
@@ -33,6 +30,6 @@ section.difficulty div{
 .levels:hover{
 		color: white;
 	}
-.playingField{
-		text-align: center;	
+section.playingField{
+		text-align: center;
 	}
