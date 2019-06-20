@@ -4,7 +4,7 @@ var HardButton = document.getElementsByClassName('levels')[2];
 var fieldCards = [];
 var score = document.getElementById("PlayerScore");
 var playingCards = [];
-var crdF = document.getElementById("cardField");
+var cardField = document.getElementById("cardField");
 var firstCard;
 var secondCard;
 var firstFlipped;
@@ -15,7 +15,7 @@ var cardsOnThetable;
 function preparingCards(pairs){
 	cardsOnThetable = pairs * 2;
 	firstFlipped = 0;
-	crdF.innerHTML = "";
+	cardField.innerHTML = "";
 	playingCards = [];
 	fieldCards = [];
 	currentScore = 100;
@@ -60,7 +60,7 @@ function displayCards(pairs){
 		card.style.margin = "2%";
 		card.id = playingCards[i];
 		card.onclick = clickOne;
-		crdF.appendChild(card);
+		cardField.appendChild(card);
 	}
 }
 function clickOne(){
@@ -70,16 +70,11 @@ function clickOne(){
     checking(this.id);
 }
 function checking(cardId){
-	if(firstFlipped == 0){ 				//atverciama pirma is poros korta
-		firstCard = cardId;
-		firstFlipped = 1;
-		flippedCards.push(cardId);
-	}
-	else{
+	if(firstFlipped == 1){ 				//atverciama pirma is poros korta
 		firstFlipped = 0;			//atverciama antra korta
 		flippedCards.push(cardId);
 		secondCard = cardId;
-		if(firstCard[0] != secondCard[0]) //patikrinimas ar kortos sudaro pora
+		if(firstCard[0] != secondCard[0] || firstCard == secondCard) //patikrinimas ar kortos sudaro pora
 		{
 			currentScore = currentScore - 2;
 			score.innerHTML = currentScore;
@@ -94,9 +89,15 @@ function checking(cardId){
 			flippedCards = [];
 		}
 	}
+	else{
+		firstCard = cardId;
+		firstFlipped = 1;
+		flippedCards.push(cardId);
+	}
 	if(flippedCards.length == cardsOnThetable)
 	{
 		alert("YOU WON");
+		preparingCards(cardsOnThetable / 2);
 	}
 	if(currentScore == 0){
 		alert("YOU LOST");
