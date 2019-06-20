@@ -69,10 +69,18 @@ function clickOne(){
 	var card = document.getElementById(this.id);
 	var dest = "url('images/"+ this.id +".png')";
 	card.style.backgroundImage = dest;
-    checking(this.id);
+	if(firstFlipped == 1)
+		checking(this.id);
+	else
+	{	firstCard = this.id;
+		firstFlipped = 1;
+		flippedCards.push(this.id);
+		alert("pirmas");
+	}
 }
 function checking(cardId){
-	if(firstFlipped == 1){ 				//atverciama pirma is poros korta
+		alert("antras");
+							//atverciama pirma is poros korta
 		firstFlipped = 0;			//atverciama antra korta
 		flippedCards.push(cardId);
 		secondCard = cardId;
@@ -81,22 +89,14 @@ function checking(cardId){
 			currentScore = currentScore - 2;
 			score.innerHTML = currentScore;
 			var currentTime = new Date().getTime();				//pauze, kol uzsivers visos kortos del neteisingo spejimo
-			while (currentTime + 1000 >= new Date().getTime()) {
-			}
+			while (currentTime + 100 >= new Date().getTime()) {}
 			var i;
 			for(i=0;i<flippedCards.length;i++){					//uzverciamos kortos
-
 				card = document.getElementById(flippedCards[i]);
 				card.style.backgroundImage = "url('images/red_back.png')";
 			}
 			flippedCards = [];
 		}
-	}
-	else{
-		firstCard = cardId;
-		firstFlipped = 1;
-		flippedCards.push(cardId);
-	}
 	if(flippedCards.length == cardsOnThetable)
 	{
 		alert("YOU WON");
