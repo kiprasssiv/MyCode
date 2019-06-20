@@ -26,7 +26,7 @@ function preparingCards(pairs){
 	var powerArrayPlace;
 	var newCard;
 	var i;
-	for(i = 0; i<pairs; i++){
+	for(i = 0; i<pairs; i++){								//Kortu poru sukurimas
 		cardSigns = ["S","H","D","C"];
 		signArrayPlace = Math.floor(Math.random()*(cardSigns.length));
 		powerArrayPlace = Math.floor(Math.random()*(cardPower.length));
@@ -40,21 +40,19 @@ function preparingCards(pairs){
 	}
 	displayCards(pairs);
 }
-
 function displayCards(pairs){
 	var i;
 	var randomizingGameSet;
 	var correctlyChosen = [];
 	var tableSize = document.getElementById("cardTable");
-	for(i = 0; i < pairs*2; i++){
+	for(i = 0; i < pairs*2; i++){							//atsitiktinai žaidimo kortos sudėliojamos masyve
 		correctlyChosen.push(0);
 		randomizingGameSet = Math.floor(Math.random()*(fieldCards.length));
 		playingCards.push(fieldCards[randomizingGameSet]);
 		fieldCards.splice(randomizingGameSet,1);
 	}
-	
 	for(i = 0; i < pairs*2; i++){
-		var card = document.createElement("BUTTON");
+		var card = document.createElement("BUTTON"); //kortos kaip mygtukai isdeliojami ir uzkraunamas vaizdas
 		card.style.padding = "6%";
 		card.style.backgroundImage = "url('https://casino4you.com/wp-content/uploads/2015/03/peekredback.jpg')";
 		card.style.backgroundSize = "100%";
@@ -63,47 +61,39 @@ function displayCards(pairs){
 		card.id = playingCards[i];
 		card.onclick = clickOne;
 		crdF.appendChild(card);
-		
 	}
 }
-
 function clickOne(){
 	var card = document.getElementById(this.id);
 	var dest = "url('images/"+ this.id +".png')";
 	card.style.backgroundImage = dest;
-	
-	if(firstFlipped == 0){
-		firstCard = this.id;
-		alert("first"+firstCard);
+    checking(this.id);
+}
+function checking(cardId){
+	if(firstFlipped == 0){ 				//atverciama pirma is poros korta
+		firstCard = cardId;
 		firstFlipped = 1;
-		flippedCards.push(this.id);
+		flippedCards.push(cardId);
 	}
 	else{
-		firstFlipped = 0;
-		flippedCards.push(this.id);
-		secondCard = this.id;
-		alert("second"+secondCard);
-		
-		var currentTime = new Date().getTime();
-		while (currentTime + 1000000000000000000 >= new Date().getTime()) {
-		}
-		
-		if(firstCard[0] != secondCard[0])
+		firstFlipped = 0;			//atverciama antra korta
+		flippedCards.push(cardId);
+		secondCard = cardId;
+		if(firstCard[0] != secondCard[0]) //patikrinimas ar kortos sudaro pora
 		{
 			currentScore = currentScore - 2;
 			score.innerHTML = currentScore;
-			
+			var currentTime = new Date().getTime();				//pauze, kol uzsivers visos kortos del neteisingo spejimo
+			while (currentTime + 1000 >= new Date().getTime()) {
+			}
 			var i;
-			for(i=0;i<flippedCards.length;i++){
+			for(i=0;i<flippedCards.length;i++){					//uzverciamos kortos
 				card = document.getElementById(flippedCards[i]);
 				card.style.backgroundImage = "url('https://casino4you.com/wp-content/uploads/2015/03/peekredback.jpg')";
 			}
 			flippedCards = [];
-			
 		}
-		
 	}
-	
 	if(flippedCards.length == cardsOnThetable)
 	{
 		alert("YOU WON");
@@ -112,5 +102,4 @@ function clickOne(){
 		alert("YOU LOST");
 		preparingCards(cardsOnThetable / 2);
 	}
-	
 }
