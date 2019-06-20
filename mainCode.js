@@ -53,9 +53,11 @@ function displayCards(pairs){
 	}
 	for(i = 0; i < pairs*2; i++){
 		var card = document.createElement("BUTTON"); //kortos kaip mygtukai isdeliojami ir uzkraunamas vaizdas
-		card.style.padding = "6%";
-		card.style.backgroundImage = "url('https://casino4you.com/wp-content/uploads/2015/03/peekredback.jpg')";
-		card.style.backgroundSize = "100%";
+		card.style.padding = "7.64% 5%";
+		card.style.height = "200%";
+		card.style.backgroundColor = "white";
+		card.style.backgroundImage = "url('images/red_back.png')";
+		card.style.backgroundSize = "100% ";
 		card.style.border = "none";
 		card.style.margin = "2%";
 		card.id = playingCards[i];
@@ -83,8 +85,9 @@ function checking(cardId){
 			}
 			var i;
 			for(i=0;i<flippedCards.length;i++){					//uzverciamos kortos
+
 				card = document.getElementById(flippedCards[i]);
-				card.style.backgroundImage = "url('https://casino4you.com/wp-content/uploads/2015/03/peekredback.jpg')";
+				card.style.backgroundImage = "url('images/red_back.png')";
 			}
 			flippedCards = [];
 		}
