@@ -11,8 +11,10 @@ var firstFlipped;
 var currentScore;
 var flippedCards = [];
 var cardsOnThetable;
+var wrong;
 
 function preparingCards(pairs){
+	wrong = 1;
 	cardsOnThetable = pairs * 2;
 	firstFlipped = 0;
 	cardField.innerHTML = "";
@@ -66,35 +68,35 @@ function displayCards(pairs){
 	}
 }
 function clickOne(){
+	if(wrong == 0){
+		for(i=0;i<flippedCards.length;i++){					//uzverciamos kortos
+				card = document.getElementById(flippedCards[i]);
+				card.style.backgroundImage = "url('images/red_back.png')";
+			}
+		flippedCards = [];
+		wrong = 1;
+	}
 	var card = document.getElementById(this.id);
 	var dest = "url('images/"+ this.id +".png')";
 	card.style.backgroundImage = dest;
-	if(firstFlipped == 1)
-		checking(this.id);
+	if(firstFlipped == 1){
+		secondCard = this.id;
+		firstFlipped = 0;
+		flippedCards.push(this.id);
+		checking(this.id);}
 	else
 	{	firstCard = this.id; //atverciama antra korta
 		firstFlipped = 1;
 		flippedCards.push(this.id);
-		alert("pirmas");
 	}
 }
 function checking(cardId){
-		alert("antras");
-		firstFlipped = 0;			//atverciama antra korta
-		flippedCards.push(cardId);
 		secondCard = cardId;
 		if(firstCard[0] != secondCard[0] || firstCard == secondCard) //patikrinimas ar kortos sudaro pora
 		{
 			currentScore = currentScore - 2;
 			score.innerHTML = currentScore;
-			var currentTime = new Date().getTime();				//pauze, kol uzsivers visos kortos del neteisingo spejimo
-			while (currentTime + 10000 >= new Date().getTime()) {}
-			var i;
-			for(i=0;i<flippedCards.length;i++){					//uzverciamos kortos
-				card = document.getElementById(flippedCards[i]);
-				card.style.backgroundImage = "url('images/red_back.png')";
-			}
-			flippedCards = [];
+			wrong = 0;
 		}
 	if(flippedCards.length == cardsOnThetable)
 	{
@@ -106,3 +108,4 @@ function checking(cardId){
 		preparingCards(cardsOnThetable / 2);
 	}
 }
+
