@@ -1,0 +1,13 @@
+.header1{
+	font-size: 35px;
+	color: #8C8989;
+	font-weight:bold;
+	text-align: center;
+}
+.card {
+   width:100px; /*width of your image*/
+   height:100px; /*height of your image*/
+   content:url(https://casino4you.com/wp-content/uploads/2015/03/peekredback.jpg);
+   margin:0; /* If you want no margin */
+   padding:0; /*if your want to padding */
+}
