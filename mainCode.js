@@ -72,7 +72,7 @@ function clickOne(){
 	if(firstFlipped == 1)
 		checking(this.id);
 	else
-	{	firstCard = this.id;
+	{	firstCard = this.id; //atverciama antra korta
 		firstFlipped = 1;
 		flippedCards.push(this.id);
 		alert("pirmas");
@@ -80,7 +80,6 @@ function clickOne(){
 }
 function checking(cardId){
 		alert("antras");
-							//atverciama pirma is poros korta
 		firstFlipped = 0;			//atverciama antra korta
 		flippedCards.push(cardId);
 		secondCard = cardId;
@@ -89,7 +88,7 @@ function checking(cardId){
 			currentScore = currentScore - 2;
 			score.innerHTML = currentScore;
 			var currentTime = new Date().getTime();				//pauze, kol uzsivers visos kortos del neteisingo spejimo
-			while (currentTime + 100 >= new Date().getTime()) {}
+			while (currentTime + 10000 >= new Date().getTime()) {}
 			var i;
 			for(i=0;i<flippedCards.length;i++){					//uzverciamos kortos
 				card = document.getElementById(flippedCards[i]);
