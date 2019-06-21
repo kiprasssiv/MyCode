@@ -108,4 +108,3 @@ function checking(cardId){
 		preparingCards(cardsOnThetable / 2);
 	}
 }
-
